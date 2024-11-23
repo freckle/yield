@@ -1,0 +1,89 @@
+name: yield
+version: 0.0.0.0
+maintainer: Freckle Education
+category: Streaming
+github: freckle/yield
+synopsis: YieldT monad transformer
+description: |
+  This package defines a class @MonadYield a@ for monads that can emit values
+  values of type @a@ while they run, and a monad transformer @YieldT a@ which
+  implements this class such that the emitted values can be captured in a
+  streaming manner.
+
+  This is an amalgamation of concepts from @pipes@, @conduit@, @foldl@, and
+  @kan-extensions@, combined into a small self-contained package.
+
+extra-doc-files:
+  - README.md
+  - CHANGELOG.md
+
+extra-source-files:
+  - package.yaml
+
+language: GHC2021
+
+ghc-options:
+  - -Weverything
+    -Wno-missing-kind-signatures
+  - -Wno-all-missed-specialisations
+  - -Wno-missed-specialisations
+  - -Wno-missing-exported-signatures # re-enables missing-signatures
+  - -Wno-missing-import-lists
+  - -Wno-missing-local-signatures
+  - -Wno-missing-safe-haskell-mode
+  - -Wno-monomorphism-restriction
+  - -Wno-prepositive-qualified-module
+  - -Wno-safe
+  - -Wno-unsafe
+
+when:
+  - condition: "impl(ghc >= 9.8)"
+    ghc-options:
+      - -Wno-missing-role-annotations
+      - -Wno-missing-poly-kind-signatures
+
+dependencies:
+  - base < 5
+
+default-extensions:
+  - BlockArguments
+  - DataKinds
+  - DeriveAnyClass
+  - DerivingVia
+  - DerivingStrategies
+  - FunctionalDependencies
+  - GADTs
+  - LambdaCase
+  - NoImplicitPrelude
+  - NoMonomorphismRestriction
+  - OverloadedStrings
+  - RecordWildCards
+  - TypeFamilies
+
+library:
+  source-dirs: library
+  other-modules:
+    - Control.Monad.Trans.Codensity
+  dependencies:
+    - containers
+    - mtl
+    - transformers
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs: tests
+    ghc-options: -threaded -rtsopts "-with-rtsopts=-N"
+    dependencies:
+      - hspec
+      - hspec-junit-formatter
+      - yield
+      - mtl
+
+  readme:
+    main: README.lhs
+    ghc-options: -pgmL markdown-unlit
+    dependencies:
+      - hspec
+      - markdown-unlit
+      - yield

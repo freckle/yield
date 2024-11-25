@@ -98,7 +98,6 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      SpecHook
       YieldSpec
       Paths_yield
   hs-source-dirs:
@@ -121,7 +120,6 @@ test-suite spec
   build-depends:
       base <5
     , hspec
-    , hspec-junit-formatter
     , mtl
     , yield
   default-language: GHC2021

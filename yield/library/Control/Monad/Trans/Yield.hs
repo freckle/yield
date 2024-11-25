@@ -21,6 +21,9 @@ import Control.Monad.Yield.Class (MonadYield (..))
 newtype YieldT a m r = YieldT (CodensityT (Yielder a m) r)
   deriving newtype (Functor, Applicative, Monad)
 
+instance MonadTrans (YieldT a) where
+  lift = YieldT . lift . lift
+
 deriving newtype instance MonadIO m => MonadIO (YieldT a m)
 
 deriving newtype instance Functor m => MonadYield a (YieldT a m)

@@ -53,12 +53,14 @@ spec = describe "YieldT" do
         `shouldReturn` ((), 'b')
     it "" $
       evalStateT
-        ( runYieldT listAggregation do
-            get >>= yield
-            modify' succ
-            get >>= yield
-            put 'x'
-            get >>= yield
+        ( do
+            (a, _) <- runYieldT listAggregation do
+              get >>= yield
+              modify' succ
+              get >>= yield
+              put 'x'
+              get >>= yield
+            gets (a,)
         )
         'g'
-        `shouldReturn` ("ghx", ())
+        `shouldReturn` ("ghx", 'x')

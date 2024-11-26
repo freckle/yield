@@ -1,7 +1,17 @@
 module Control.Monad.Yield
-  ( module Control.Monad.Yield.Class
-  , module Control.Monad.Trans.Yield
-  , module Control.Monad.Yield.Aggregation
+  ( -- * Class
+    MonadYield (..)
+
+    -- * Monad transformer
+  , YieldT
+  , runYieldT
+  , hoistYieldT
+
+    -- * Aggregation
+  , Aggregation (..)
+  , noAggregation
+  , seqAggregation
+  , listAggregation
   ) where
 
 import Control.Monad.Trans.Yield

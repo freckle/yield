@@ -1,7 +1,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 module Control.Monad.Trans.Yield
-  ( YieldT (..)
+  ( YieldT
   , runYieldT
   , hoistYieldT
   ) where

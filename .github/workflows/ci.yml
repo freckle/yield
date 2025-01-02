@@ -35,6 +35,16 @@ jobs:
         env:
           STACK_YAML: ${{ matrix.stack-yaml }}
 
+  required-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: freckle/await-statuses-action@v1
+        with:
+          statuses: |
+            test (stack.yaml)
+            test (stack-lts-20.26.yaml)
+            test (stack-lts-21.25.yaml)
+
   lint:
     runs-on: ubuntu-latest
     steps:

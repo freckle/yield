@@ -1,13 +1,18 @@
 {
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    stable.url = "github:nixos/nixpkgs/nixos-24.11";
     freckle.url = "git+ssh://git@github.com/freckle/flakes?dir=main";
     flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    inputs:
+    inputs.flake-utils.lib.eachDefaultSystem (
+      system:
       let
-        nixpkgsArgs = { inherit system; config = { }; };
+        nixpkgsArgs = {
+          inherit system;
+          config = { };
+        };
 
         nixpkgs = {
           stable = import inputs.stable nixpkgsArgs;
@@ -40,5 +45,6 @@
             export STACK_YAML=stack-nightly.yaml
           '';
         };
-      });
+      }
+    );
 }

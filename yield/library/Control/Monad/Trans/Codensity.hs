@@ -4,13 +4,14 @@ module Control.Monad.Trans.Codensity
   ( CodensityT (..)
   ) where
 
+import Prelude (Applicative (..), Functor (..), Monad (..), const, ($), (.))
+
 import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.Reader (MonadReader (ask, local))
 import Control.Monad.State (MonadState (state))
 import Control.Monad.Trans.Class (MonadTrans (..))
 import Control.Monad.Yield.Class (MonadYield (..))
 import Data.Kind (Type)
-import Prelude (Applicative (..), Functor (..), Monad (..), const, ($), (.))
 
 -- | The "codensity transform", taken as an excerpt from the @kan-extensions@
 --   package, following the model of @conduit@ to permit efficient monadic bind

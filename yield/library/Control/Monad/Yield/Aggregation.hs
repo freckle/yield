@@ -5,14 +5,16 @@ module Control.Monad.Yield.Aggregation
   , listAggregation
   ) where
 
+import Prelude (Applicative (..), Functor (..), (.), (<$>))
+
 import Data.Foldable (toList)
 import Data.Sequence (Seq (..))
-import Prelude (Applicative (..), Functor (..), (.), (<$>))
 
 -- | An effectful stream consumer
 --
 -- The type parameter @x@ represents the consumer's internal state.
-data Aggregation m a b = forall x.
+data Aggregation m a b
+  = forall x.
   Aggregation
   { begin :: m x
   -- ^ Produce the initial state

@@ -23,10 +23,10 @@
       in
       rec {
         packages = {
-          fourmolu = freckle.fourmolu-0-13-x;
+          fourmolu = freckle.fourmolu-0-17-x;
 
           ghc = freckleLib.haskellBundle {
-            ghcVersion = "ghc-9-8-2";
+            ghcVersion = "ghc-9-8-4";
             enableHLS = true;
           };
         };
@@ -42,7 +42,7 @@
           ];
 
           shellHook = ''
-            export STACK_YAML=stack-nightly.yaml
+            export STACK_YAML=stack-lts23.yaml
           '';
         };
       }

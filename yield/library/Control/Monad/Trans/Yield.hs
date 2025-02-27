@@ -19,7 +19,7 @@ import Control.Monad.Yield.Class (MonadYield (..))
 
 -- | Monad transformer that adds dynamically interpretable 'MonadYield' support
 newtype YieldT a m r = YieldT (CodensityT (Yielder a m) r)
-  deriving newtype (Functor, Applicative, Monad)
+  deriving newtype (Applicative, Functor, Monad)
 
 instance MonadTrans (YieldT a) where
   lift = YieldT . lift . lift

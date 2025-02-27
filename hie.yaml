@@ -1,2 +1,10 @@
 cradle:
   stack:
+    - path: "yield/library"
+      component: "yield:lib"
+
+    - path: "yield/./"
+      component: "yield:test:readme"
+
+    - path: "yield/tests"
+      component: "yield:test:spec"

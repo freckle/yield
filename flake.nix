@@ -1,7 +1,7 @@
 {
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    freckle.url = "git+ssh://git@github.com/freckle/flakes?dir=main";
+    stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    freckle.url = "github:freckle/flakes?dir=main";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =

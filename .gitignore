@@ -3,3 +3,4 @@
 .hiedb
 .direnv
 .envrc
+*.lock

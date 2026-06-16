@@ -1,0 +1,4 @@
+resolver: lts-24.45
+
+packages:
+  - yield

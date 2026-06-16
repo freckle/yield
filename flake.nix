@@ -1,7 +1,6 @@
 {
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    freckle.url = "github:freckle/flakes?dir=main";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
@@ -9,36 +8,18 @@
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        nixpkgsArgs = {
-          inherit system;
-          config = { };
-        };
-
-        nixpkgs = {
-          stable = import inputs.stable nixpkgsArgs;
-        };
-        freckle = inputs.freckle.packages.${system};
-        freckleLib = inputs.freckle.lib.${system};
-
+        nixpkgs = inputs.nixpkgs.legacyPackages.${system};
       in
-      rec {
-        packages = {
-          fourmolu = freckle.fourmolu-0-17-x;
+      {
+        devShells.default = nixpkgs.mkShell {
+          buildInputs = [ nixpkgs.zlib ];
 
-          ghc = freckleLib.haskellBundle {
-            ghcVersion = "ghc-9-8-4";
-            enableHLS = true;
-          };
-        };
-
-        devShells.default = nixpkgs.stable.mkShell {
-          buildInputs = with (nixpkgs.stable); [
-            zlib
-          ];
-
-          nativeBuildInputs = with (packages); [
-            fourmolu
-            ghc
+          nativeBuildInputs = [
+            nixpkgs.haskellPackages.fourmolu
+            nixpkgs.haskellPackages.cabal-install
+            (nixpkgs.haskell-language-server.override {
+              supportedGhcVersions = ["9103"];
+            })
           ];
 
           shellHook = ''
